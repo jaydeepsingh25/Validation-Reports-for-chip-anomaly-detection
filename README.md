@@ -5,8 +5,8 @@
 * User Login
 * User Registration
 * Email Confirmation
-* Forgot Password
-* Reset Password
+* Forgot /Reset Password
+* Update Profile
 ## Monitoring and Reporting Module
 * Monitor the experiment results on the dashboard.
 * Download the validation report in PDF format
