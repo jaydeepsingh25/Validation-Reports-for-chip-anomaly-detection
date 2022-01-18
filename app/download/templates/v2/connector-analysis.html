@@ -1,0 +1,107 @@
+<div style="height:1380px; width:992px; padding: 75px; font-size: 14px; line-height: 20px; position:relative">
+<div style="display:-webkit-box; -webkit-box-orient: vertical; height: 105px; margin-bottom:50px;">
+  <div style="display:-webkit-box; justify-content: space-between; -webkit-box-pack: justify;">
+    <h1 style="margin-top:0px; margin-bottom: 0px; width: 50%; font-size:52px; letter-spacing: 1px; font-weight: 500; line-height: 44px;">Sample {{connector}}</h1>
+    <img style="height:50px; width: 225px; object-fit: contain;" src="{{ get_image_data('Palitronica-logo') }}">
+  </div>
+  <div style=" display:flex; display:-webkit-box; -webkit-box-orient: horizontal; align-items: center; height: 50px;">
+    <div style="margin-right: 15px;padding-left: 5px;" class="report-status-icon large-circle {{ 'red' if (connectors_data_v2[connector]['Connector Analysis']['Verification Result'] == False)}}">
+      {{circle_svg_data}}
+    </div>
+    <h2 style="font-size:26px;">{{connectors_data_v2[connector]['Connector Analysis']['Verification Id']}}</h2>
+   </div>
+</div>
+<div style="height: 1px; border-bottom: 2px dotted black; margin: 50px 0px; width: 100%;"></div>
+<div style="display:-webkit-box; -webkit-box-orient: horizontal; height: 190px; font-size:17px; margin-top:50px; margin-bottom:50px;  justify-content: space-between; -webkit-box-pack: justify;">
+    <div>
+      <div class="info-row">
+        <div class="info-title">Verification Result</div>
+        {% if (connectors_data_v2[connector]['Connector Analysis']['Verification Result']) %}
+        <div class="info-desc">Success</div>
+        {% else %}
+        <div class="info-desc">Fail</div>
+        {% endif %}
+      </div>
+      <div class="info-row">
+        <div class="info-title">Baseline Match</div>
+        <div class="info-desc">{{"%.2f"|format(connectors_data_v2[connector]['Connector Analysis']['Baseline Match'])}}</div>
+        <!-- <div class="info-desc">{{connectors_data_v2[connector]['Connector Analysis']['Baseline Match']}}</div> -->
+      </div>
+      <div class="info-row">
+        <div class="info-title">Verification ID</div>
+        <div class="info-desc">{{connectors_data_v2[connector]['Connector Analysis']['Verification Id']}}</div>
+      </div>
+      <div class="info-row">
+        <div class="info-title">Baseline ID</div>
+        <div class="info-desc">{{connectors_data_v2[connector]['Connector Analysis']['Baseline Id']}}</div>
+      </div>
+      <div class="info-row">
+        <div class="info-title">Date of Verification</div>
+        <div class="info-desc">{{connectors_data_v2[connector]['Connector Analysis']['Date of Verification']}}</div>
+      </div>
+      <div class="info-row">
+        <div class="info-title">Mode of Operation</div>
+        <div class="info-desc">{{connectors_data_v2[connector]['Connector Analysis']['Mode of Operation']}}</div>
+      </div>
+    </div>
+    <div>
+      <div class="info-row">
+        <div class="info-title">Manufacturer</div>
+        <div class="info-desc">{{connectors_data_v2[connector]['Connector Analysis']['Manufacturer']}}</div>
+      </div>
+      <div class="info-row">
+        <div class="info-title">Manufacturer Id</div>
+        <div class="info-desc">{{connectors_data_v2[connector]['Connector Analysis']['Manufacturer Id']}}</div>
+      </div>
+      <div class="info-row">
+        <div class="info-title">System Type</div>
+        <div class="info-desc">{{connectors_data_v2[connector]['Connector Analysis']['System Type']}}</div>
+      </div>
+      <div class="info-row">
+        <div class="info-title">System Model</div>
+        <div class="info-desc">{{connectors_data_v2[connector]['Connector Analysis']['System Model']}}</div>
+      </div>
+      <div class="info-row">
+        <div class="info-title">Serial Number</div>
+        <div class="info-desc">{{connectors_data_v2[connector]['Connector Analysis']['Serial Number']}}</div>
+      </div>
+      <div class="info-row">
+        <div class="info-title">Sample Condition</div>
+        <div class="info-desc">{{connectors_data_v2[connector]['Connector Analysis']['Sample Condition']}}</div>
+      </div>
+    </div>
+</div>
+<div style="height: 1px; border-bottom: 2px dotted black; margin:50px 0px; width: 100%;"></div>
+<div style="display:-webkit-box; -webkit-box-orient: horizontal; height: 550px; margin:50px 0px;">
+  {% set p_index = 0 %}  
+  {% for block_index in range(0,3) %}
+    {% set new_index = p_index + block_index %}
+    {% if new_index < (connectors_data_v2[connector]['Partitions'] | length) %}
+    {% set partition = connectors_data_v2[connector]['Partitions'][new_index] %}
+      {% if block_index != 0 %}
+        <div class="vertical-sep"></div>
+      {% endif %}
+      <div style="width:210px;">
+        {% for pin in partition %}
+        <div class="info-row">
+          <div style="width:120px;">PIN {{pin}}</div>
+          <div style="width:50px;font-weight:500">{{"%.2f"|format(connectors_data_v2[connector]['Pin Analysis'][pin]['score'])}}</div>
+          <!-- <div style="width:50px;font-weight:500">{{connectors_data_v2[connector]['Pin Analysis'][pin]['score'] | round(2)}}</div> -->
+          {% if (connectors_data_v2[connector]['Pin Analysis'][pin]['alert']) %}
+          <div style="width:70px;font-weight:500;color:#c30000;text-transform: uppercase;">ALERT</div>
+          {% else %}
+          <div style="width:70px;font-weight:500;"></div>
+          {% endif %}          
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    {% endfor %}
+</div>
+<div style="display:-webkit-box; -webkit-box-orient: horizontal; height: 25px; padding: 75px; justify-content: space-between; -webkit-box-pack: justify;position:absolute; left:0px; bottom:0px; width: 100%">
+  <div>&copy; Copyright</div>
+  <div>{{loop.index}}</div>
+  <div>Griffin Corp. Report</div>
+</div>
+</div>
+

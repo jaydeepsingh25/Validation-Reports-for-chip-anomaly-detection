@@ -1,0 +1,77 @@
+  <div class="title-div summary-block" style="height: 150px;">
+    <div class="heading">Verification Report</div>
+    <div class ="report-id">
+      <div class="report-status-icon large-circle {{ 'red' if ((data['Baseline Match'].split('%')[0] | int) < threshold)}}">
+        {{circle_svg_data}}
+      </div>
+      <h2 class="sub-heading">{{data['Assessment ID']}}</h2>
+      <div class="report-hyperlink-img"><a href="https://google.com" target="_blank"><img src="{{ get_image_data('hyperlink') }}" style="width:1.5rem;height:1.5rem;"/></a>
+      </div>
+    </div>
+    <hr class="section-break"></hr>
+  </div>
+  <div class="ver-info-div summary-block" style="height: 600px;"> 
+    <div class="ver-heading"> Verification Information</div>
+    <div class="ver-info">
+      <div class="ver-left">
+        <div>
+          {% for row in verBlocks %}
+          <div class="ver-block">
+            {% for entry in row %}
+            <div class="ver-row">
+              <div class= "info-entry">{{entry}}:</div>
+              <div>
+                {% if entry == 'Verification Result' %}
+                <span class="{{ 'red' if data[entry].lower() == 'fail'}}">{{circle_svg_data}}</span>
+                {% endif %}
+                {% if entry == 'Baseline Match' %}
+                <span class="{{ 'red' if ((data[entry].split('%')[0] | int) < threshold)}}">{{circle_svg_data}}</span>
+                {% endif %}
+                <span class="{{ 'bold small-left' if entry in ['Verification Result', 'Baseline Match']}}">{{data[entry]}}</span>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="ver-right">
+        <div class="next-steps">
+          <div class="desc-heading">Recommended Next Steps</div>
+          <div>
+            <ul>
+            {% for step in data['Recommended Next Steps'] %}
+              <li>{{step}}</li>
+            {% endfor %}
+          </ul>
+          </div>
+        </div>
+        <div>
+          <div class="desc-heading">Group Comparison</div>
+          <img class = "img-plot" src="{{ graph_image }}"/>
+        </div>
+      </div>
+    </div>
+  </div> 
+  <div class="connector-info summary-block" style="height: 390px;">
+    <hr class="section-break"></hr>
+    <div class="analysis-heading semi-bold">Connector Analysis</div>
+    <div class="connector-images">
+      {% for connector in connectors_data_v1 %}
+      <div>
+        <div class="connector-description">{{connector}}</div>
+        <img class="connector-img" src= {{get_image_data(connectors_data_v1[connector]['imageUrl'], 'svg')}}></img>
+        <div class="connector-description">
+          <span class="{{ 'red' if ((connectors_data_v1[connector]['Connector Analysis']['Port Similarity'] | int) < threshold)}}">{{circle_svg_data}}</span>
+          {{connectors_data_v1[connector]['Connector Analysis']['Port Similarity'] + '%'}}
+        </div>
+      </div>
+      {% endfor%}
+    </div>
+    </div>
+    <hr class="section-break"></hr>
+    <div class="footer-section summary-block" style="margin-top: 3rem;height: 40px;">
+      <div> Confidential </div>
+      <div style="margin-left: -2rem;">{{data['Assessment ID']}}</div>
+      <div>1</div>
+    </div>

@@ -1,0 +1,194 @@
+.content{
+    font-family:"proxima_nova_regular";
+}
+.red > svg{
+    fill: red
+}
+.green > svg{
+    fill: green
+}
+.large-circle > svg{
+    width: 16px;
+    height: 16px
+}
+.content{
+    font-size: 12pt;
+}
+.semi-bold{
+ font-weight: 600;
+}
+.bold{
+    font-weight: 700;
+}
+.small-left{
+    margin-left: 3px;
+}
+.sub-heading{
+   margin-left:1rem;
+   font-weight:bold;
+   font-size: 18pt;
+   letter-spacing: 1pt;
+}
+.heading{
+  text-transform: uppercase;
+  font-size: 32pt; 
+  font-weight: bold;
+  letter-spacing: 1pt;
+}
+.summary-block{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.info-entry{
+    width: 15rem;
+    font-weight: 600
+}
+.ver-row , .report-id{
+    display:flex;
+    display: -webkit-box;
+    margin-bottom: 0.2rem;
+}
+.report-status-icon{
+    margin-top: 1.5rem;
+}
+.report-hyperlink-img{
+    margin-top: 1.3rem;
+    margin-left: 0.5rem;
+}
+.section-break{
+    border-top: 1px dashed black;
+    margin-top: 1rem;
+}
+.footer-section{
+    font-weight: 600 !important;
+}
+.ver-heading, .analysis-heading, .connector-heading, .footer-section{
+    margin: 1rem 0 2rem 0;
+    font-size :13pt;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1pt;
+}
+.desc-heading {
+    font-size :13pt;
+    font-weight: bold;
+    letter-spacing: 1pt;
+}
+.ver-block{
+    margin: 1rem 0;
+    font-size: 12pt;
+  }
+.ver-info {
+  margin-bottom: 2rem !important;
+}
+.ver-info, .connector-images, .footer-section{	
+    display: flex;	
+    display: -webkit-box;	
+    flex-direction: column;	
+    -webkit-box-orient: horizontal;	
+    margin-bottom: 1rem;	
+}	
+.ver-info{	
+    height: 120%;	
+}
+.ver-info, .connector-images, .footer-section, .partition-block {
+    justify-content: space-between;
+    -webkit-box-pack: justify;
+}
+.img-plot{
+    width: 400px;
+    height: 400px;
+}
+.connector-img{
+    width: 150px;
+    height: 150px;
+    margin:1rem 0;
+}
+.connector-img-large{
+    width: 200px;
+    height: 200px;
+    margin: -2rem 0;
+}
+.connector-img-large svg{
+    width: 100%;
+    height: 100%;
+}
+.connector-info{
+    margin-top: 5rem;
+}
+.ver-info-div, .connector-info{
+    margin-bottom: 1rem;
+}
+
+.connector-description{
+    width: 100%;
+    text-align: center;
+}
+.next-steps{
+    margin-bottom: 2rem;
+}
+.connector-block{
+    margin: 1rem 0rem;
+}
+.partition-block{
+    margin: 1rem;
+    width: 30%;
+    padding: auto;
+}
+.vertical-line{
+    height: 300px;
+    width: 2px;
+    margin-left: -1rem;
+    margin-right: 2rem;
+    border-left: 1px dashed black;
+}
+.connector-analysis{
+    display: flex;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-flex: 3;   
+    justify-content: space-between;
+    -webkit-box-pack: justify;
+}
+.analysis-left{
+    margin-top: 1rem;
+}
+.pin-analysis{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    height: 750px;
+    margin-top: 3rem; 
+}
+.partition-container{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    margin-left: -1rem;
+}
+.partition-row{
+    margin-bottom: 2rem;
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+}
+.pin-row{
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    margin-bottom: 0.5rem;
+}
+.pin-no{
+    font-weight: 600;
+    width: 75px;
+    text-align: center;
+}
+.pin-status-circle{
+    margin-left: 1.5rem;
+}
+.alert-text{
+    text-transform:uppercase;
+    color:red;
+    margin-left:0.5rem;
+}
+.pin-status-info{
+    margin-left:0.5rem;
+    width: 50px;
+    font-weight: bold;
+}

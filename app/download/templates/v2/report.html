@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       *{
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+    }
+    .info-row{
+      margin: 10px 0px;
+      height:25px;
+      display:flex;
+      display:-webkit-box;
+      -webkit-box-orient: horizontal;
+      justify-content: space-between;
+      -webkit-box-pack: justify;
+    }
+    .info-title{
+      width:230px;
+      font-weight: 400;
+    }
+    .info-desc{
+      width: 230px;
+      font-weight: 500;
+    }
+    .vertical-sep{
+      width: 1px;
+      height: 100%;
+      margin: 0px 50px;
+      /* margin-right: 50px;
+      margin-left: 20px; */
+      border-left: 2px dotted black;
+    }
+      </style>
+    <title id="ver-title">Verification Report</title>
+  </head>
+  <body class="content" style = "font-family: runda, sans-serif; margin:0px;">
+    {% for connector in connectors_data_v2 %}
+    {% with connector = connector, new_index = loop.index %}
+    {% include  'v2/connector-analysis.html' %}
+    {% endwith %}
+    {% if loop.index != ((connectors_data_v2 | length)) %}
+    <div style="float:none;"><div style="page-break-before: always;"></div></div>
+    {% endif %}
+    {% endfor %}
+  </body>
+</html>

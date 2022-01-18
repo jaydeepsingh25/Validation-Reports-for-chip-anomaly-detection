@@ -1,0 +1,76 @@
+<div style="page-break-before: always;"></div>
+<div style="display: -webkit-box; -webkit-box-orient: vertical; height: 250px;">
+  <div class="connector-heading">{{connector}} Results and Analysis</div>
+  <div class="connector-analysis">
+    <div class="analysis-left">
+      <div class="desc-heading">Connector Analyis</div>
+      <div class="connector-block">
+        <div class="ver-row">
+          <div class= "info-entry">Verification Result:</div>
+          <span class="{{ 'red' if (connectors_data_v1[connector]['Connector Analysis']['Verification Result'].lower() == 'fail')}}">{{circle_svg_data}}</span>
+          <span style="margin-left: 3px;">{{connectors_data_v1[connector]['Connector Analysis']['Verification Result']}}</span>
+        </div>
+        <div class="ver-row">
+          <div class= "info-entry">Port Similarity:</div>
+          <span class="{{ 'red' if ((connectors_data_v1[connector]['Connector Analysis']['Port Similarity'] | int) < threshold)}}">{{circle_svg_data}}</span>
+          <span style="margin-left: 3px;">{{connectors_data_v1[connector]['Connector Analysis']['Port Similarity']}}%</span>
+        </div>
+      </div>
+      <div class="connector-block">
+        <div class="ver-row">
+          <div class= "info-entry">Connector Type:</div><span>{{connectors_data_v1[connector]['Connector Analysis']['Connector Type']}}</span>
+        </div>
+        <div class="ver-row">
+          <div class= "info-entry">Connector Function:</div><span>{{connectors_data_v1[connector]['Connector Analysis']['Connector Function']}}</span>
+        </div>
+        <div class="ver-row">
+          <div class= "info-entry">Placeholder:</div><span>{{connectors_data_v1[connector]['Connector Analysis']['Placeholder']}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="analysis-right" style="margin-right: 4rem">
+        <div id = '{{connector}}-large' class="connector-img-large">{{connectors_data_v1[connector]['svgData']}}</div>
+    </div>
+  </div>
+</div>
+<div class="pin-analysis">
+    <div class="desc-heading">Pin Analyis</div>
+    <div class="partition-container">
+      {% for p_index in range(0,connectors_data_v1[connector]['Partitions'] | length, 3) %}
+        <div class="partition-row">
+          {% for block_index in range(0,3) %}
+          {% set new_index = p_index + block_index %}
+          {% if new_index < (connectors_data_v1[connector]['Partitions'] | length) %}
+          {% set partition = connectors_data_v1[connector]['Partitions'][new_index] %}
+          {% if block_index != 0 %}
+          <div class="vertical-line"></div>
+          {% endif %}
+          <div class="partition-block">
+            {% for pin in partition %}
+            <div class="ver-row pin-row">
+              <div class="pin-no"> Pin {{pin}} :</div>
+              <div class="pin-status-circle {{ 'red' if ((connectors_data_v1[connector]['Pin Analysis'][pin] | int) < threshold)}}">
+                {{circle_svg_data}}
+              </div>
+              <div class="pin-status-info">{{connectors_data_v1[connector]['Pin Analysis'][pin]}}%</div>
+              {% if (connectors_data_v1[connector]['Pin Analysis'][pin] | int) < threshold %}
+              <div class="semi-bold alert-text"> ALERT </div>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+</div>
+<div class="notes-comments" style="display: -webkit-box; -webkit-box-orient: vertical; height: 150px; margin-top:2rem;">
+    <div class="desc-heading">Notes and Comments</div>
+    <div>{{connectors_data_v1[connector]['Notes and Comments']}}</div>
+</div>
+<div class="footer-section" style="display: -webkit-box; height: 40px; margin-top:2.5rem;">
+    <div> Confidential </div>
+    <div style="margin-left: -2rem;">{{data['Assessment ID']}}</div>
+    <div>{{new_index + 1}}</div>
+</div>

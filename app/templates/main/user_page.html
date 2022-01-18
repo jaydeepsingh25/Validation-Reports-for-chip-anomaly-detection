@@ -1,0 +1,101 @@
+{% extends "main/main_base.html" %}  {# main/main_base.html extends layout.html #}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header p-3">
+            <h2>Verification Report</h2>
+            <div class="d-flex align-items-center position-relative">
+              <div class="report-status-icon large-circle {{ 'red' if ((data['Baseline Match'].split('%')[0] | int) < threshold)}}">
+                {{circle_svg_data}}
+              </div>
+                <h3>{{data['Assessment ID']}}</h3>
+                <a class="position-absolute" style = "text-decoration: none; right:10px;" href="{{ url_for('download.report_v1') }}" download="Report.pdf"><button class="btn btn-primary d-flex align-items-center"><span class="material-icons">file_download</span>Download Report</button></a>
+                <!-- <div><a href="https://google.com" target="_blank"><img src="{{ get_image_data('hyperlink') }}" style="width:1.5rem;height:1.5rem;"></a></div> -->
+            </div>
+
+        </div>
+        <div class="card-body p-4">
+            <div class="ver-info-div summary-block"> 
+                <div class="ver-heading"> Verification Information</div>
+                <div class="ver-info">
+                  <div class="ver-left">
+                    <div>
+                      {% for row in verBlocks %}
+                      <div class="ver-block">
+                        {% for entry in row %}
+                        <div class="ver-row">
+                          <div class= "info-entry">{{entry}}:</div>
+                          <div>
+                            {% if entry == 'Verification Result' %}
+                            <span class="{{ 'red' if data[entry].lower() == 'fail'}}">{{circle_svg_data}}</span>
+                            {% endif %}
+                            {% if entry == 'Baseline Match' %}
+                            <span class="{{ 'red' if ((data[entry].split('%')[0] | int) < threshold)}}">{{circle_svg_data}}</span>
+                            {% endif %}
+                            <span class="{{ 'bold small-left' if entry in ['Verification Result', 'Baseline Match']}}">{{data[entry]}}</span>
+                          </div>
+                        </div>
+                        {% endfor %}
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="ver-right">
+                    <div class="next-steps">
+                      <div class="desc-heading">Recommended Next Steps</div>
+                      <div>
+                        <ul>
+                        {% for step in data['Recommended Next Steps'] %}
+                          <li>{{step}}</li>
+                        {% endfor %}
+                      </ul>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="desc-heading">Group Comparison</div>
+                      <img class = "img-plot" src="{{ graph_image }}"/>
+                    </div>
+                  </div>
+                </div>
+              </div> 
+        </div>
+    </div>
+    <div class="card connector-info summary-block">
+      <div class="card-header p-3 semi-bold"> Connector Analysis </div>
+      <div class="d-flex justify-content-around flex-wrap card-body">
+        {% for connector in connectors_data %}
+        <div>
+          <div class="connector-description">{{connector}}</div>
+          <img id = "{{connector}}-small"  onclick="changeConnector('{{loop.index}}')" class="connector-img" src= {{get_image_data(connectors_data[connector]['imageUrl'], 'svg')}}></img>
+          <div class="connector-description">
+            <span class="{{ 'red' if ((connectors_data[connector]['Connector Analysis']['Port Similarity'] | int) < threshold)}}">{{circle_svg_data}}</span>
+            {{connectors_data[connector]['Connector Analysis']['Port Similarity'] + '%'}}
+          </div>
+        </div>
+        {% endfor%}
+      </div>
+      </div>
+      <div id="connector-carousel" class="carousel carousel-dark slide"  data-bs-interval="false">
+        <div class="carousel-inner">
+          {% for connector in connectors_data %}
+          {% with connector = connector, new_index = loop.index %}
+          {% include 'main/connector_analysis.html' %}
+          {% endwith %}
+          {% endfor %}
+        </div>
+        <button style="margin-left:-12%;" class="carousel-control-prev" type="button" data-bs-target="#connector-carousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button style="margin-right:-12%;" class="carousel-control-next" type="button" data-bs-target="#connector-carousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    <!-- <h2>{%trans%}Members page{%endtrans%}</h2>
+    <p><a href={{ url_for('user.register') }}>{%trans%}Register{%endtrans%}</a></p>
+    <p><a href={{ url_for('user.login') }}>{%trans%}Sign in{%endtrans%}</a></p>
+    <p><a href={{ url_for('main.member_page') }}>{%trans%}Member Page{%endtrans%}</a> (login_required: member@example.com / Password1)</p>
+    <p><a href={{ url_for('main.admin_page') }}>{%trans%}Admin Page{%endtrans%}</a> (roles_required: admin@example.com / Password1)</p>
+    <p><a href={{ url_for('user.logout') }}>{%trans%}Sign out{%endtrans%}</a></p> -->
+{% endblock %}

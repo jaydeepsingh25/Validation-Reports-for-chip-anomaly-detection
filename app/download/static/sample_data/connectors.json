@@ -1,0 +1,90 @@
+{
+  "usb1":{
+      "Connector Analysis": {
+          "Verification Id": "NA",
+          "Baseline Id": "galileo__008",
+          "Manufacturer": "NA",
+          "Manufacturer Id": "NA",
+          "System Type": "NA",
+          "System Model": "NA",
+          "Serial Number": "NA",
+          "Sample Condition": "NA",
+          "Verification Result": false,
+          "Baseline Match": 38.390947444309376,
+          "Mode of Operation": "Baseline",
+          "Date of Verification": "2021/07/06"
+        },
+        "Pin Analysis": {
+          "Dminus": {
+            "score": 1.0994739158278437,
+            "alert": false
+          },
+          "Dplus": {
+            "score": 1.4203862855337948,
+            "alert": false
+          },
+          "RXminus": {
+            "score": 2.098241146162337,
+            "alert": false
+          },
+          "RXplus": {
+            "score": 1.258929391931133,
+            "alert": false
+          },
+          "TXminus": {
+            "score": 1.4354871672791205,
+            "alert": false
+          },
+          "TXplus": {
+            "score": 4.232146236238305,
+            "alert": false
+          },
+          "drain": {
+            "score": 1.0065912262078884,
+            "alert": false
+          },
+          "otgid": {
+            "score": 1.5047614392046016,
+            "alert": false
+          },
+          "vbus": {
+            "score": 2.4347217856152388,
+            "alert": false
+          }
+        }
+  },
+  "eth0":{
+      "Connector Analysis": {
+        "Verification Id": "NA",
+        "Baseline Id": "galileo__008",
+        "Manufacturer": "NA",
+        "Manufacturer Id": "NA",
+        "System Type": "NA",
+        "System Model": "NA",
+        "Serial Number": "NA",
+        "Sample Condition": "NA",
+        "Verification Result": false,
+        "Baseline Match": 205.872561599814,
+        "Mode of Operation": "Baseline",
+        "Date of Verification": "2021/07/06"
+      },
+      "Pin Analysis": {
+        "DAminus": {
+          "score": 7.956597279067865,
+          "alert": false
+        },
+        "DBplus": {
+          "score": 8.423206938498877,
+          "alert": false
+        },
+        "DCminus": {
+          "score": 2.682354036287961,
+          "alert": false
+        },
+        "DDminus": {
+          "score": 8.026187328599917,
+          "alert": false
+        }
+      }
+  }
+}

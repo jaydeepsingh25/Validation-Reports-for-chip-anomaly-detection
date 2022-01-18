@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <style>
+        @font-face{
+        font-family: "proxima_nova_regular";
+        src: url({{encoded_font}});
+        font-weight: normal;
+        font-style: normal;
+        };
+      </style>
+      <script>var failureElements = {} </script>
+    <title id="ver-title">Verification Report</title>
+  </head>
+  <body class="content" style = "font-family: proxima_nova_regular;">
+    {% include 'v1/report-summary.html' %}
+    {% for connector in connectors_data_v1 %}
+    {% with connector = connector, new_index = loop.index %}
+    {% include 'v1/connector-analysis.html' %}
+    {% endwith %}
+    {% endfor %}
+  </body>
+</html>
